@@ -1,58 +1,32 @@
 package dev.tomdotbat.jet.documents;
 
-import dev.tomdotbat.jet.windows.EditorWindow;
-
 import javax.swing.*;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.UndoManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
 
-/*
-    This class uses parts of the code from the webpage below:
-    http://www.java2s.com/Code/Java/Swing-JFC/Undoredotextarea.htm
- */
-
-public class HistoryManager {
-    public HistoryManager(EditorWindow window, JMenuItem undoBtn, JMenuItem redoBtn) { //Constructs a history manager attached to an editor window
-        this.textEntry = window.getTextEntry();
-        this.undoBtn = undoBtn;
-        this.redoBtn = redoBtn;
-
-        undoManager = new UndoManager(); //Create an undo manager
-
-        //Add the undo listener to the text entry
-        textEntry.getDocument().addUndoableEditListener(e -> {
-            undoManager.addEdit(e.getEdit());
-            updateButtons();
-        });
-
-        //Add the undo button listener
-        undoBtn.addActionListener(e -> {
-            try {
-                undoManager.undo(); //Undo the last change if possible
-            } catch (CannotRedoException ex) {
-                ex.printStackTrace();
-            }
-            updateButtons();
-        });
-
-        //Add the redo button listener
-        redoBtn.addActionListener(e -> {
-            try {
-                undoManager.redo(); //Redo the last undo if possible
-            } catch (CannotRedoException ex) {
-                ex.printStackTrace();
-            }
-            updateButtons();
-        });
+public class FileBrowser extends JFrame {
+    public FileBrowser(String title) { //Constructs a file browser frame with a specific title
+        this.title = title;
     }
 
-    private final UndoManager undoManager;
-    private JTextArea textEntry;
-    private JMenuItem undoBtn;
-    private JMenuItem redoBtn;
+    public String getFileLocation() { //Gets a file location from a user when requested
+        JFileChooser fileChooser = new JFileChooser(); //Create a file chooser and set its title
+        fileChooser.setDialogTitle(title);
 
-    private void updateButtons() { //Update the undo and redo buttons to feed back whether they can be used of not
-        undoBtn.setEnabled(undoManager.canUndo());
-        redoBtn.setEnabled(undoManager.canRedo());
+        String filePath = null;
+
+        //Set the filter to only show .txt files and set the default selection to Untitled.txt
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Document (*.txt)", "txt"));
+        fileChooser.setSelectedFile(new File("Untitled.txt"));
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) //Get the file path if the user didn't cancel
+            filePath = fileChooser.getSelectedFile().getPath();
+
+        //Close this frame
+        dispose();
+
+        return filePath;
     }
+
+    private final String title;
 }
