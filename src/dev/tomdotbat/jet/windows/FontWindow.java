@@ -22,9 +22,9 @@ public class FontWindow {
         JLabel fontSize = new JLabel("Font size");
         container.add(fontSize);
 
-        int currentFontSize = editorWindow.getPrefs().getFontSize();
+        int currentFontSize = 0; //editorWindow.getPrefs().getFontSize();
         SpinnerModel fontSizeModel = new SpinnerNumberModel(currentFontSize, 11, 72, 1);
-        fontSizeModel.addChangeListener(new prefsFontSizeListener(editorWindow));
+        //fontSizeModel.addChangeListener(new prefsFontSizeListener(editorWindow));
 
         JSpinner fontSizeSelector = new JSpinner(fontSizeModel);
         container.add(fontSizeSelector);
@@ -34,8 +34,8 @@ public class FontWindow {
         container.add(fontLabel);
 
         //Get the font list from the window
-        JComboBox<String> fontList = new JComboBox<>(editorWindow.getFontList());
-        fontList.addItemListener(new prefsFontListener(this));
+        JComboBox<String> fontList = new JComboBox<>(); //editorWindow.getFontList());
+        //fontList.addItemListener(new prefsFontListener(this));
         container.add(fontList);
 
         //Add font style selector components
@@ -47,7 +47,7 @@ public class FontWindow {
 
         //Create the combo box with the new model
         JComboBox<String> fontStyleList = new JComboBox<>(styleModel);
-        fontStyleList.addItemListener(new prefsFontStyleListener(editorWindow));
+        //fontStyleList.addItemListener(new prefsFontStyleListener(editorWindow));
         container.add(fontStyleList);
 
 
@@ -58,8 +58,8 @@ public class FontWindow {
         dialog.setLocationRelativeTo(null);
 
         //Align the font components with the actual preferences
-        String initialFontFamily = editorWindow.getPrefs().getFontName();
-        String initialFont = editorWindow.getPrefs().getFontName();
+        String initialFontFamily = ""; //editorWindow.getPrefs().getFontName();
+        String initialFont = ""; //editorWindow.getPrefs().getFontName();
 
         initialFontFamily = initialFontFamily.replace(" Bold", "");
         initialFontFamily = initialFontFamily.replace(" Italic", "");
