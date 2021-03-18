@@ -1,4 +1,4 @@
-package dev.tomdotbat.jet.documents;
+package dev.tomdotbat.jet.windows;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

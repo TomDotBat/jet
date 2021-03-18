@@ -2,6 +2,7 @@ package dev.tomdotbat.jet.windows;
 
 import dev.tomdotbat.jet.documents.Document;
 import dev.tomdotbat.jet.documents.HistoryManager;
+import dev.tomdotbat.jet.listeners.editorwindow.CloseListener;
 import dev.tomdotbat.jet.listeners.editorwindow.KeyInputListener;
 import dev.tomdotbat.jet.listeners.editorwindow.MouseInputListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.HelpListener;
@@ -10,7 +11,6 @@ import dev.tomdotbat.jet.listeners.editorwindow.menubar.editmenu.FindListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.editmenu.PasteListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.editmenu.ReplaceListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.filemenu.*;
-import dev.tomdotbat.jet.listeners.editorwindow.CloseListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.formatmenu.FontListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.formatmenu.TextWrapListener;
 import dev.tomdotbat.jet.listeners.editorwindow.menubar.viewmenu.StatusBarToggleListener;
