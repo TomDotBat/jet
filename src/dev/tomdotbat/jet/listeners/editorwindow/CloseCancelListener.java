@@ -14,5 +14,5 @@ public class CloseCancelListener implements ActionListener {
         popup.dispose(); //Close the popup
     }
 
-    private JDialog popup;
+    private final JDialog popup;
 }
