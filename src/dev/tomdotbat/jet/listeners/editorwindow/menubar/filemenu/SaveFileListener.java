@@ -3,7 +3,7 @@ package dev.tomdotbat.jet.listeners.editorwindow.menubar.filemenu;
 import dev.tomdotbat.jet.documents.Document;
 import dev.tomdotbat.jet.documents.DocumentStorage;
 import dev.tomdotbat.jet.windows.EditorWindow;
-import dev.tomdotbat.jet.documents.FileBrowser;
+import dev.tomdotbat.jet.windows.FileBrowser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

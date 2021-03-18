@@ -1,7 +1,7 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.filemenu;
 
 import dev.tomdotbat.jet.windows.EditorWindow;
-import dev.tomdotbat.jet.documents.FileBrowser;
+import dev.tomdotbat.jet.windows.FileBrowser;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
