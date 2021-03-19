@@ -12,7 +12,7 @@ public class MouseInputListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        window.updateLineNumber(); //Update the line number on every mouse input
+        window.getStatusBar().updateLineNumber(); //Update the line number on every mouse input
     }
 
     @Override

@@ -20,6 +20,6 @@ public class SaveFileAsListener extends SaveFileListener implements ActionListen
         super.actionPerformed(e); //Once the new location is set we can call the same action that SaveFileListener uses
 
         window.setTitle(location + " - JET");
-        window.updateLineNumber();
+        window.getStatusBar().updateLineNumber();
     }
 }

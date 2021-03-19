@@ -6,9 +6,9 @@ import dev.tomdotbat.jet.listeners.editorwindow.CloseListener;
 import dev.tomdotbat.jet.listeners.editorwindow.KeyInputListener;
 import dev.tomdotbat.jet.listeners.editorwindow.MouseInputListener;
 import dev.tomdotbat.jet.windows.editor.MenuBar;
+import dev.tomdotbat.jet.windows.editor.StatusBar;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class EditorWindow extends JFrame {
@@ -24,16 +24,14 @@ public class EditorWindow extends JFrame {
         setLayout(new BorderLayout(50, 0));
 
         //Set up the menu bar
-        //setupMenuBar();
         setJMenuBar(new MenuBar(this));
 
         //Create the child elements of the toolbar and add it to the window
         //setupToolBar();
         //add(toolBar, BorderLayout.SOUTH);
 
-        //Create our child elements of the status bar and add it to the bottom of the window
-        setupStatusBar();
-        statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.LINE_AXIS));
+        //Set up the status bar
+        statusBar = new StatusBar(this);
         add(statusBar, BorderLayout.SOUTH);
 
         //Create out main document text entry
@@ -62,24 +60,7 @@ public class EditorWindow extends JFrame {
         setFont(new Font("Arial", Font.PLAIN, 14));
     }
 
-    public void updateLineNumber() { //Updates the line number and column in the status bar
-        int caretPos = textEntry.getCaretPosition();
-
-        int lineNo = 0;
-        int columnNo = 0;
-
-        try { //Attempt to work out the line and column number form the caret position
-            lineNo = textEntry.getLineOfOffset(caretPos);
-            columnNo = caretPos - textEntry.getLineStartOffset(lineNo);
-        }
-        catch (Exception ignored) {}
-
-        //Set the text in the line number/column status bar labels
-        lineNumberLabel.setText(" Ln " + (lineNo + 1) + " \t ");
-        lineColumnLabel.setText("Col: " + (columnNo + 1) + " ");
-    }
-
-    public String getText() { //Getters preferences and content
+    public String getText() { //Getters for preferences and content
         return textEntry.getText();
     }
 
@@ -99,7 +80,7 @@ public class EditorWindow extends JFrame {
         return textEntry;
     }
 
-    public JPanel getStatusBar() {
+    public StatusBar getStatusBar() {
         return statusBar;
     }
 
@@ -138,7 +119,7 @@ public class EditorWindow extends JFrame {
         this.zoomLevel = zoomLevel;
         setFont(new Font(font.getFontName(), Font.PLAIN, (int) (fontSize * zoomLevel)), true);
 
-        zoomLevelLabel.setText(" " + Math.round(zoomLevel * 100) + "% ");
+        statusBar.updateZoomLevel();
         //set preference here
     }
 
@@ -148,37 +129,6 @@ public class EditorWindow extends JFrame {
 
     public void setRedoBtn(JMenuItem redoBtn) {
         this.redoBtn = redoBtn;
-    }
-
-    private void setupStatusBar() { //Creates the child elements of the status bar and adds the appropriate listeners
-        Font statusBarFont = new Font("Arial", Font.PLAIN, 12);
-
-        lineNumberLabel = new JLabel(" Ln 1, \t ");
-        lineNumberLabel.setFont(statusBarFont);
-        lineNumberLabel.setBorder(new EmptyBorder(4, 0, 4, 0));
-
-        lineColumnLabel = new JLabel("Col 1 ");
-        lineColumnLabel.setFont(statusBarFont);
-
-        zoomLevelLabel = new JLabel(" 100% ");
-        zoomLevelLabel.setFont(statusBarFont);
-
-        //Create a separator for each status label
-        JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
-        separator.setMaximumSize(new Dimension(0, 20));
-
-        JSeparator separator2 = new JSeparator(SwingConstants.VERTICAL);
-        separator2.setMaximumSize(new Dimension(0, 20));
-
-        //Add the elements the the status bar
-        statusBar.add(Box.createHorizontalGlue());
-        statusBar.add(separator);
-        statusBar.add(lineNumberLabel);
-        statusBar.add(lineColumnLabel);
-
-        statusBar.add(Box.createRigidArea(new Dimension(30, 0)));
-        statusBar.add(separator2);
-        statusBar.add(zoomLevelLabel);
     }
 
     private void setupTextEntry() { //Creates, sets up our text entry and adds the listeners
@@ -203,10 +153,7 @@ public class EditorWindow extends JFrame {
     private JScrollPane scroller;
     private JTextArea textEntry;
 
-    private final JPanel statusBar = new JPanel();
-    private JLabel lineNumberLabel;
-    private JLabel lineColumnLabel;
-    private JLabel zoomLevelLabel;
+    private final StatusBar statusBar;
 
     private Document document;
 

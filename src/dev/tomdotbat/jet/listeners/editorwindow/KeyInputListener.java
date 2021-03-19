@@ -18,7 +18,7 @@ public class KeyInputListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        window.updateLineNumber(); //Update the line number on every keypress
+        window.getStatusBar().updateLineNumber(); //Update the line number on every keypress
     }
 
     private final EditorWindow window;

@@ -23,7 +23,7 @@ public class OpenFileListener implements ActionListener {
 
         window.setTitle(location + " - JET"); //Update the editor with the new document details
         window.setDocument(document);
-        window.updateLineNumber();
+        window.getStatusBar().updateLineNumber();
     }
 
     private final EditorWindow window;
