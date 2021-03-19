@@ -2,7 +2,6 @@ package dev.tomdotbat.jet.listeners.editorwindow;
 
 import dev.tomdotbat.jet.windows.EditorWindow;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

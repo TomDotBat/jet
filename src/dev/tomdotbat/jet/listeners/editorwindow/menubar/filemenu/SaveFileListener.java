@@ -32,7 +32,6 @@ public class SaveFileListener implements ActionListener {
             document.setLocation(location);
         }
 
-        if (location == null) return;
         document.setBody(window.getText()); //Update the document body to the latest text entry content
         DocumentStorage.writeDocument(document);
 

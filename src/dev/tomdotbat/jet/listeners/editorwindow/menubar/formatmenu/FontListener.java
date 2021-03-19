@@ -1,6 +1,7 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.formatmenu;
 
 import dev.tomdotbat.jet.windows.EditorWindow;
+import dev.tomdotbat.jet.windows.FontWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,7 @@ public class FontListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //new FontWindow(window); //Create a font editor window
+        new FontWindow(window); //Create a font editor window
     }
 
     private final EditorWindow window;

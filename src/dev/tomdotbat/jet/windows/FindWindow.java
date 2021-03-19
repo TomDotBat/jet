@@ -53,7 +53,7 @@ public class FindWindow {
         directionDownRadio.setMnemonic(0);
         directionGroup.add(directionDownRadio);
 
-        //Create the label andtext entry for the search and add it to the container
+        //Create the label and text entry for the search and add it to the container
         searchContainer.add(new JLabel("Find: "));
 
         searchGrid = new JPanel();

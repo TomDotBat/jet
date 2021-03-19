@@ -12,10 +12,10 @@ import javax.swing.undo.UndoManager;
  */
 
 public class HistoryManager {
-    public HistoryManager(EditorWindow window, JMenuItem undoBtn, JMenuItem redoBtn) { //Constructs a history manager attached to an editor window
-        this.textEntry = window.getTextEntry();
-        this.undoBtn = undoBtn;
-        this.redoBtn = redoBtn;
+    public HistoryManager(EditorWindow window) { //Constructs a history manager attached to an editor window
+        JTextArea textEntry = window.getTextEntry();
+        this.undoBtn = window.getUndoBtn();
+        this.redoBtn = window.getRedoBtn();
 
         undoManager = new UndoManager(); //Create an undo manager
 
@@ -47,9 +47,8 @@ public class HistoryManager {
     }
 
     private final UndoManager undoManager;
-    private JTextArea textEntry;
-    private JMenuItem undoBtn;
-    private JMenuItem redoBtn;
+    private final JMenuItem undoBtn;
+    private final JMenuItem redoBtn;
 
     private void updateButtons() { //Update the undo and redo buttons to feed back whether they can be used of not
         undoBtn.setEnabled(undoManager.canUndo());

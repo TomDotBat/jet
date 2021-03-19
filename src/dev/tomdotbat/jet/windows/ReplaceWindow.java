@@ -12,7 +12,7 @@ public class ReplaceWindow extends FindWindow {
         dialog.setTitle("Find and Replace Text");
 
         //Create a new container for the replacement entry
-        replacementContainer = new JPanel();
+        JPanel replacementContainer = new JPanel();
         replacementContainer.setLayout(new BoxLayout(replacementContainer, BoxLayout.LINE_AXIS));
 
         //Add a replace label before the entry
@@ -31,7 +31,7 @@ public class ReplaceWindow extends FindWindow {
         rightGridContainer.remove(1);
 
         //Add the replace button
-        replaceButton = new JButton("Replace");
+        JButton replaceButton = new JButton("Replace");
         replaceButton.addActionListener(new ReplaceListener(window, this));
         rightGridContainer.add(replaceButton);
 
@@ -43,8 +43,5 @@ public class ReplaceWindow extends FindWindow {
         return replacementEntry.getText();
     }
 
-    private final JPanel replacementContainer;
-
     private final JTextField replacementEntry;
-    private final JButton replaceButton;
 }

@@ -11,19 +11,19 @@ public class DocumentStorage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(location)); //Create a file reader
 
-            String body = "";
+            StringBuilder body = new StringBuilder();
             String line = reader.readLine();
 
             while(line != null) { //Read until there's no lines left to read
-                body += line + "\n";
+                body.append(line).append("\n");
                 line = reader.readLine();
             }
 
             reader.close();
 
-            body = body.substring(0, body.length() - 1); //Trim off the last newline char
-
-            document = new Document(body, location); //Build the document object
+            document = new Document( //Build the document object
+                    body.substring(0, body.length() - 1), //Trim off the last newline char
+                    location);
         }
         catch (Exception ignored) {}
 
