@@ -35,10 +35,16 @@ public class EditorWindow extends JFrame {
         add(statusBar, BorderLayout.SOUTH);
 
         //Create out main document text entry
-        setupTextEntry();
+        textEntry = new JTextArea(35, 35);
+        textEntry.setLineWrap(true);
+        textEntry.addKeyListener(new KeyInputListener(this));
+        textEntry.addMouseListener(new MouseInputListener(this));
 
         //Create the scroller and add it to the window
-        setupScroller();
+        JScrollPane scroller = new JScrollPane(textEntry);
+        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroller.setPreferredSize(new Dimension(800, 450));
         add(scroller, BorderLayout.CENTER);
 
         //Attach a history manager to the editor window
@@ -131,33 +137,15 @@ public class EditorWindow extends JFrame {
         this.redoBtn = redoBtn;
     }
 
-    private void setupTextEntry() { //Creates, sets up our text entry and adds the listeners
-        textEntry = new JTextArea(35, 35);
-        textEntry.setLineWrap(true);
-        textEntry.addKeyListener(new KeyInputListener(this));
-        textEntry.addMouseListener(new MouseInputListener(this));
-    }
-
-    private void setupScroller() { //Creates the scroller to allow a larger text entry than what can fit within the window
-        scroller = new JScrollPane(textEntry);
-        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroller.setPreferredSize(new Dimension(800, 450));
-    }
-
-    //private JToolBar toolBar;
-
-    private JMenuItem undoBtn; //Editor UI elements
-    private JMenuItem redoBtn;
-
-    private JScrollPane scroller;
-    private JTextArea textEntry;
-
+    private final JTextArea textEntry; //Editor UI elements
     private final StatusBar statusBar;
+
+    private JMenuItem undoBtn; //History buttons
+    private JMenuItem redoBtn;
 
     private Document document;
 
-    private Font font; //Editor preferences
+    private Font font; //Text preferences
     private int fontSize;
     private float zoomLevel = 1;
 }
