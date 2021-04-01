@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.formatmenu;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 
 import java.awt.event.ItemListener;
@@ -12,7 +13,9 @@ public class TextWrapListener implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        window.setTextWrap(e.getStateChange() == ItemEvent.SELECTED); //Set the wrapping state to on if the check is visible
+        boolean state = e.getStateChange() == ItemEvent.SELECTED; //Set the wrapping state to on if the check is visible
+        window.setTextWrap(state);
+        PreferenceManager.getInstance().setWordWrap(state);
     }
 
     private final EditorWindow window;

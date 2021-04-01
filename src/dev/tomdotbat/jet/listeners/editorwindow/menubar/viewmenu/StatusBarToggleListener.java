@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.viewmenu;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 
 import java.awt.event.ItemEvent;
@@ -15,7 +16,7 @@ public class StatusBarToggleListener implements ItemListener {
         boolean state = e.getStateChange() == ItemEvent.SELECTED; //Is the toggle on or off?
 
         window.getStatusBar().setVisible(state);
-        //set preference here
+        PreferenceManager.getInstance().setShowStatusBar(state);
     }
 
     private final EditorWindow window;

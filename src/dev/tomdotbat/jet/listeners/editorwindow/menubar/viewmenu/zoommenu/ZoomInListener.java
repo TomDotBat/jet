@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.viewmenu.zoommenu;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 
 import java.awt.event.ActionEvent;
@@ -12,7 +13,9 @@ public class ZoomInListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.setZoomLevel(window.getZoomLevel() + 0.15f); //Increase the zoom level by 15%
+        float zoomLevel = window.getZoomLevel() + 0.15f;
+        window.setZoomLevel(zoomLevel); //Increase the zoom level by 15%
+        PreferenceManager.getInstance().setZoomLevel(zoomLevel);
     }
 
     private final EditorWindow window;

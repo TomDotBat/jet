@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 import dev.tomdotbat.jet.windows.SaveWindow;
 
@@ -16,7 +17,10 @@ public class CloseListener implements WindowListener {
         String curText = window.getText();
         String latestSavedText = window.getDocument().getBody();
 
-        if (curText.equals(latestSavedText)) window.dispose();
+        if (curText.equals(latestSavedText)) {
+            PreferenceManager.getInstance().savePreferences();
+            window.dispose();
+        }
         else new SaveWindow(window);
     }
 

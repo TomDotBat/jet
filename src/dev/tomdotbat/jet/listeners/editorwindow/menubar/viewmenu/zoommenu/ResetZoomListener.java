@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.viewmenu.zoommenu;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ public class ResetZoomListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         window.setZoomLevel(1); //Set the zoom level back to its default value
+        PreferenceManager.getInstance().setZoomLevel(1f);
     }
 
     private final EditorWindow window;

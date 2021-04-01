@@ -5,6 +5,7 @@ import dev.tomdotbat.jet.documents.HistoryManager;
 import dev.tomdotbat.jet.listeners.editorwindow.CloseListener;
 import dev.tomdotbat.jet.listeners.editorwindow.KeyInputListener;
 import dev.tomdotbat.jet.listeners.editorwindow.MouseInputListener;
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.editor.MenuBar;
 import dev.tomdotbat.jet.windows.editor.StatusBar;
 
@@ -15,6 +16,9 @@ public class EditorWindow extends JFrame {
     public EditorWindow() { //Editor window constructor
         super("Untitled - JET");
 
+        //Create/get a copy of the preference manager
+        PreferenceManager preferenceManager = PreferenceManager.getInstance();
+
         addWindowListener(new CloseListener(this)); //Add our window close event listener
 
         //Set up an untitled document
@@ -23,22 +27,23 @@ public class EditorWindow extends JFrame {
         //Set up a border layout
         setLayout(new BorderLayout(50, 0));
 
+        //Create out main document text entry
+        textEntry = new JTextArea(35, 35);
+        textEntry.setLineWrap(preferenceManager.getWordWrap());
+        textEntry.addKeyListener(new KeyInputListener(this));
+        textEntry.addMouseListener(new MouseInputListener(this));
+
+        //Set up the status bar
+        statusBar = new StatusBar(this);
+        add(statusBar, BorderLayout.SOUTH);
+        statusBar.setVisible(preferenceManager.getShowStatusBar());
+
         //Set up the menu bar
         setJMenuBar(new MenuBar(this));
 
         //Create the child elements of the toolbar and add it to the window
         //setupToolBar();
         //add(toolBar, BorderLayout.SOUTH);
-
-        //Set up the status bar
-        statusBar = new StatusBar(this);
-        add(statusBar, BorderLayout.SOUTH);
-
-        //Create out main document text entry
-        textEntry = new JTextArea(35, 35);
-        textEntry.setLineWrap(true);
-        textEntry.addKeyListener(new KeyInputListener(this));
-        textEntry.addMouseListener(new MouseInputListener(this));
 
         //Create the scroller and add it to the window
         JScrollPane scroller = new JScrollPane(textEntry);
@@ -59,41 +64,31 @@ public class EditorWindow extends JFrame {
         //Set the window location to the center of the screen
         setLocationRelativeTo(null);
 
-        //Set up preferences or whatever
-        //String fontName = windowPreferences.getFontName();
-        //int fontSize = windowPreferences.getFontSize();
-
-        setFont(new Font("Arial", Font.PLAIN, 14));
+        //Set the text entry font according to the preferences
+        setFont(new Font(preferenceManager.getFontName(), Font.PLAIN, preferenceManager.getFontSize()));
     }
 
     public String getText() { //Getters for preferences and content
         return textEntry.getText();
-    }
-
+    } //Getters for window elements and properties
     public Font getFont() {
         return font;
     }
-
     public float getZoomLevel() {
         return zoomLevel;
     }
-
     public Document getDocument() {
         return document;
     }
-
     public JTextArea getTextEntry() {
         return textEntry;
     }
-
     public StatusBar getStatusBar() {
         return statusBar;
     }
-
     public JMenuItem getUndoBtn() {
         return undoBtn;
     }
-
     public JMenuItem getRedoBtn() {
         return redoBtn;
     }
@@ -105,7 +100,6 @@ public class EditorWindow extends JFrame {
 
     public void setTextWrap(boolean state) { //Sets the text wrapping state
         textEntry.setLineWrap(state);
-        //set preference here
     }
 
     public void setFont(Font font) { //Sets the font of the text entry
@@ -118,7 +112,6 @@ public class EditorWindow extends JFrame {
 
         if (isZoomed) return;
         this.fontSize = font.getSize();
-        //set preference here
     }
 
     public void setZoomLevel(float zoomLevel) { //Resize the font and update the zoom label according to the zoom amount
@@ -126,13 +119,11 @@ public class EditorWindow extends JFrame {
         setFont(new Font(font.getFontName(), Font.PLAIN, (int) (fontSize * zoomLevel)), true);
 
         statusBar.updateZoomLevel();
-        //set preference here
     }
 
     public void setUndoBtn(JMenuItem undoBtn) {
         this.undoBtn = undoBtn;
     }
-
     public void setRedoBtn(JMenuItem redoBtn) {
         this.redoBtn = redoBtn;
     }
@@ -147,5 +138,5 @@ public class EditorWindow extends JFrame {
 
     private Font font; //Text preferences
     private int fontSize;
-    private float zoomLevel = 1;
+    private float zoomLevel = PreferenceManager.getInstance().getZoomLevel();
 }
