@@ -43,6 +43,13 @@ public class PreferenceManager {
         this.showStatusBar = showStatusBar;
     }
 
+    public boolean getShowIconBar() {
+        return showIconBar;
+    }
+    public void setShowIconBar(boolean showIconBar) {
+        this.showIconBar = showIconBar;
+    }
+
     public void savePreferences() { //Saves the current set of preferences to a file
         try {
             FileOutputStream fileOutput = new FileOutputStream("preferences.dat");
@@ -52,6 +59,7 @@ public class PreferenceManager {
             dataOutput.writeBoolean(wordWrap);
             dataOutput.writeFloat(zoomLevel);
             dataOutput.writeBoolean(showStatusBar);
+            dataOutput.writeBoolean(showIconBar);
 
             dataOutput.writeInt(fontName.length()); //Indicate the string length of the font name so we know how many chars to read
             dataOutput.writeChars(fontName);
@@ -73,6 +81,7 @@ public class PreferenceManager {
             wordWrap = dataInput.readBoolean();
             zoomLevel = dataInput.readFloat();
             showStatusBar = dataInput.readBoolean();
+            showIconBar = dataInput.readBoolean();
 
             int fontNameLength = dataInput.readInt(); //Builds the fontName string by reading the specified amount of chars from the file
             StringBuilder fontNameBuilder = new StringBuilder();
@@ -92,4 +101,5 @@ public class PreferenceManager {
     private boolean wordWrap = true;
     private float zoomLevel = 1;
     private boolean showStatusBar = true;
+    private boolean showIconBar = true;
 }
