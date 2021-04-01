@@ -66,6 +66,7 @@ public class EditorWindow extends JFrame {
 
         //Set the text entry font according to the preferences
         setFont(new Font(preferenceManager.getFontName(), Font.PLAIN, preferenceManager.getFontSize()));
+        setZoomLevel(preferenceManager.getZoomLevel());
     }
 
     public String getText() { //Getters for preferences and content
@@ -138,5 +139,5 @@ public class EditorWindow extends JFrame {
 
     private Font font; //Text preferences
     private int fontSize;
-    private float zoomLevel = PreferenceManager.getInstance().getZoomLevel();
+    private float zoomLevel;
 }

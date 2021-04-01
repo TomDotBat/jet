@@ -1,5 +1,6 @@
 package dev.tomdotbat.jet.listeners.editorwindow.menubar.filemenu;
 
+import dev.tomdotbat.jet.preferences.PreferenceManager;
 import dev.tomdotbat.jet.windows.EditorWindow;
 import dev.tomdotbat.jet.windows.SaveWindow;
 
@@ -17,7 +18,10 @@ public class ExitListener implements ActionListener {
         String curText = window.getText();
         String latestSavedText = window.getDocument().getBody();
 
-        if (!saveBefore || curText.equals(latestSavedText)) window.dispose();
+        if (!saveBefore || curText.equals(latestSavedText)) {
+            PreferenceManager.getInstance().savePreferences();
+            window.dispose();
+        }
         else new SaveWindow(window);
     }
 
