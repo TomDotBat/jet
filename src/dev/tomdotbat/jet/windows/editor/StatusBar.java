@@ -61,7 +61,7 @@ public class StatusBar extends JPanel {
         return label;
     }
 
-    private static Font font = new Font("Arial", Font.PLAIN, 12); //Create a font for all labels used on the status bar
+    private static final Font font = new Font("Arial", Font.PLAIN, 12); //Create a font for all labels used on the status bar
 
     private final EditorWindow editor;
     private final JLabel lineNumberLabel;
