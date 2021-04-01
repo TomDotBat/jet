@@ -6,6 +6,7 @@ import dev.tomdotbat.jet.listeners.editorwindow.CloseListener;
 import dev.tomdotbat.jet.listeners.editorwindow.KeyInputListener;
 import dev.tomdotbat.jet.listeners.editorwindow.MouseInputListener;
 import dev.tomdotbat.jet.preferences.PreferenceManager;
+import dev.tomdotbat.jet.windows.editor.IconBar;
 import dev.tomdotbat.jet.windows.editor.MenuBar;
 import dev.tomdotbat.jet.windows.editor.StatusBar;
 
@@ -33,6 +34,11 @@ public class EditorWindow extends JFrame {
         textEntry.addKeyListener(new KeyInputListener(this));
         textEntry.addMouseListener(new MouseInputListener(this));
 
+        //Set up the icon bar
+        iconBar = new IconBar(this);
+        add(iconBar, BorderLayout.NORTH);
+        iconBar.setVisible(preferenceManager.getShowIconBar());
+
         //Set up the status bar
         statusBar = new StatusBar(this);
         add(statusBar, BorderLayout.SOUTH);
@@ -40,10 +46,6 @@ public class EditorWindow extends JFrame {
 
         //Set up the menu bar
         setJMenuBar(new MenuBar(this));
-
-        //Create the child elements of the toolbar and add it to the window
-        //setupToolBar();
-        //add(toolBar, BorderLayout.SOUTH);
 
         //Create the scroller and add it to the window
         JScrollPane scroller = new JScrollPane(textEntry);
@@ -86,6 +88,9 @@ public class EditorWindow extends JFrame {
     }
     public StatusBar getStatusBar() {
         return statusBar;
+    }
+    public IconBar getIconBar() {
+        return iconBar;
     }
     public JMenuItem getUndoBtn() {
         return undoBtn;
@@ -131,6 +136,7 @@ public class EditorWindow extends JFrame {
 
     private final JTextArea textEntry; //Editor UI elements
     private final StatusBar statusBar;
+    private final IconBar iconBar;
 
     private JMenuItem undoBtn; //History buttons
     private JMenuItem redoBtn;
