@@ -7,7 +7,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class StatusBarToggleListener implements ItemListener {
-    public StatusBarToggleListener(EditorWindow window) { //Constructs the toolbar toggle listener and attaches the editor window
+    public StatusBarToggleListener(EditorWindow window) { //Constructs the status bar toggle listener
         this.window = window;
     }
 
