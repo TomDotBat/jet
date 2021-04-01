@@ -51,7 +51,7 @@ public class EditorWindow extends JFrame {
         JScrollPane scroller = new JScrollPane(textEntry);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroller.setPreferredSize(new Dimension(800, 450));
+        scroller.setPreferredSize(new Dimension(800, 470));
         add(scroller, BorderLayout.CENTER);
 
         //Attach a history manager to the editor window
