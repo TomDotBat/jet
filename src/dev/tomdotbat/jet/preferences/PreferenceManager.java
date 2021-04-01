@@ -48,7 +48,7 @@ public class PreferenceManager {
             FileOutputStream fileOutput = new FileOutputStream("preferences.dat");
             DataOutputStream dataOutput = new DataOutputStream(fileOutput);
 
-            dataOutput.writeInt(fontSize);
+            dataOutput.writeInt(fontSize); //Write all of our preferences in the expected order
             dataOutput.writeBoolean(wordWrap);
             dataOutput.writeFloat(zoomLevel);
             dataOutput.writeBoolean(showStatusBar);
@@ -69,13 +69,16 @@ public class PreferenceManager {
             FileInputStream fileInput = new FileInputStream("preferences.dat");
             DataInputStream dataInput = new DataInputStream(fileInput);
 
-            fontSize = dataInput.readInt();
+            fontSize = dataInput.readInt(); //Read the preferences in the same order they were written
             wordWrap = dataInput.readBoolean();
             zoomLevel = dataInput.readFloat();
             showStatusBar = dataInput.readBoolean();
 
-            StringBuilder fontNameBuilder = new StringBuilder(); //Builds the fontName string by reading the specified amount of chars from the file
-            for (int i = 0; i < dataInput.readInt(); i++) fontNameBuilder.append(dataInput.readChar());
+            int fontNameLength = dataInput.readInt(); //Builds the fontName string by reading the specified amount of chars from the file
+            StringBuilder fontNameBuilder = new StringBuilder();
+
+            for (int i = 0; i < fontNameLength; i++) fontNameBuilder.append(dataInput.readChar());
+
             fontName = fontNameBuilder.toString();
 
             fileInput.close();
